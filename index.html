@@ -59,15 +59,33 @@
             maxZoom: 18,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+        
         L.control.zoom({
             position:'bottomleft'
         }).addTo(map);
-        for ( var i=0; i < markers.length; ++i ) 
-        {
-           L.marker( [markers[i].lat, markers[i].long] )
-            .bindPopup(markers[i].name+'<br>'+markers[i].anzahl)
-            .addTo( map );
-        }
+        
+        //Use kimonolabs for scraping 
+        $.ajax({
+            "url":"https://www.kimonolabs.com/api/6qium7f6?apikey=YOURAPIKEYHERE",
+            "crossDomain":true,
+            "dataType":"jsonp",
+            //Make a call to the Kimono API following the "url" 
+    
+            'success': function(response){ 
+            // If the call request was successful and the data was retrieved, this function will create a list displaying the data
+         
+                var collection = response.results.bierherkunft;
+                for ( var i=0; i < markers.length; ++i ) 
+                {
+                    for (var i = 0; i < collection.length; i++)
+                    {   
+                        L.marker( [markers[i].lat, markers[i].long], {icon: myIcon})
+                        .bindPopup('<a target="_blank" href='+collection[i].name.href+'>'+collection[i].name.text+'</a><br>'+collection[i].anzahl)
+                        .addTo( map );
+                    }
+                }
+            }
+        }); 
     </script>
     <!-- End Document
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->

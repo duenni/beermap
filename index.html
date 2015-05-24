@@ -68,14 +68,21 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         
-        //EasyButton
-        L.easyButton('fa-beer', 
+        //EasyButton Wiki
+        L.easyButton('fa fa-beer', 
             function (){
                 window.open('http://www.massafaka.at/massawiki/doku.php?id=bierstats:uebersicht');
             },
          'Bieruebersicht'
         )
         
+        //EasyButton Github
+        L.easyButton('fa fa-github', 
+            function (){
+                window.open('https://github.com/duenni/beermap');
+            },
+            'Github'
+        )
         //Use kimonolabs for scraping 
         $.ajax({
             "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.myapikey,

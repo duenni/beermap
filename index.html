@@ -44,6 +44,8 @@
         var map = L.map('map',{
             center: [20.0, 5.0],
             zoom: 2,
+            worldCopyJump: true,
+            layers: new L.tileLayer('https://{s}.tiles.mapbox.com/v4/duenni.847e1c91/{z}/{x}/{y}.png?access_token='+apikey.mapbox+'')
         });
         
         //Change marker icon
@@ -55,18 +57,9 @@
             popupAnchor: [0, -14]
         });
         
-        //Setup tile layer
-        mapLink = 
-            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        /*L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; ' + mapLink + ' Contributors',
-            maxZoom: 18,
-            }).addTo(map); */ 
-            L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        //Copyright information
+        map.attributionControl.addAttribution('&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>');
+
         
         //EasyButton Wiki
         L.easyButton('fa fa-beer', 
@@ -85,7 +78,7 @@
         )
         //Use kimonolabs for scraping 
         $.ajax({
-            "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.myapikey,
+            "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.kimonolabs,
             "crossDomain":true,
             "dataType":"jsonp",
             //Make a call to the Kimono API following the "url" 
@@ -100,9 +93,9 @@
                     {   
                         L.marker( [markers[i].lat, markers[i].long], {icon: myIcon})
                         .bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[i].name.href+'>'+collection[i].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[i].anzahl)
-                        .addTo( map );
+                        .addTo(map);
                     }
-                }
+                }            
             }
         }); 
     </script>

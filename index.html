@@ -41,7 +41,7 @@
 
     <script>
         //Initialize map
-        var map = L.map('map',{
+        var map = L.map('map', {
             center: [20.0, 5.0],
             zoom: 2,
             worldCopyJump: true,
@@ -77,15 +77,15 @@
         //Use kimonolabs for scraping 
         $.ajax({
             "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.kimonolabs,
-            "crossDomain":true,
-            "dataType":"jsonp",
+            "crossDomain": true,
+            "dataType": "jsonp",
             //Make a call to the Kimono API following the "url" 
     
             'success': function(response){ 
             // If the call request was successful and the data was retrieved, this function will create a list displaying the data
          
                 var collection = response.results.bierherkunft;
-                for ( var i=0; i < markers.length; ++i ) 
+                for (var i=0; i < markers.length; ++i) 
                 {
                     for (var i = 0; i < collection.length; i++)
                     {   

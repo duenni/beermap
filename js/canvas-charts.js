@@ -26,6 +26,8 @@ function makeChart() {
 	});
 	chart.render();
 }
+
+//Only render the chart when modal gets clicked
 $(document).ready(function() {
     var clickLink = document.getElementById("modal-link");
     clickLink.addEventListener('click', makeChart);

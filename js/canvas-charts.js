@@ -1,30 +1,36 @@
-//CanvasJS
-function makeChart() {
-    var chart = new CanvasJS.Chart("chartContainer",
-	{
-		title:{
-			text: "Email Categories",
-			verticalAlign: 'top',
-			horizontalAlign: 'left'
-		},
+function makeChart() {  
+    $.ajax({
+        url:"https://www.kimonolabs.com/api/ba3gx8yk?apikey="+apikey.kimonolabs,
+        crossDomain: true,
+        dataType: "jsonp",
+        success: function (response) {
+            //If calling the API was successful create a canvasjs chart
+            var collection = response.results.biersorten;
+            var finals = [];
+            for(var i = 0; i < collection.length; i++)
+            {
+                finals.push({ 'y': collection[i].anzahl, 'label': collection[i].sorte.text });
+            }
+                    
+            var chart = new CanvasJS.Chart("chartContainer",{
                 animationEnabled: true,
-		data: [
-		{        
-			type: "doughnut",
-			startAngle:20,
-			toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
-			indexLabel: "{label} #percent%",
-			dataPoints: [
-				{  y: 67, label: "Inbox" },
-				{  y: 28, label: "Archives" },
-				{  y: 10, label: "Labels" },
-				{  y: 7,  label: "Drafts"},
-				{  y: 4,  label: "Trash"}
-			]
-		}
-		]
-	});
-	chart.render();
+                title:{
+                    text: "Biersorten"
+                },
+                
+                data: [
+                {
+                    type: "pie",
+                    dataPoints: finals
+                }
+                ]
+            });
+            chart.render();
+        },
+        error: function (xhr, status) {
+            //handle errors
+        }
+    });
 }
 
 //Only render the chart when modal gets clicked

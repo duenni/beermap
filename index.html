@@ -16,6 +16,7 @@
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
@@ -25,6 +26,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/easy-button.js"></script>
     <script type='text/javascript' src='js/biere.json'></script>
+    <script type='text/javascript' src='js/canvasjs.min.js'></script>
     <script type='text/javascript' src='js/apikey.js'></script>
 
     <!-- Favicon
@@ -38,6 +40,17 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
     <div id="map"></div>
+
+    <section class="modal--show" id="modal-text" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-inner">
+            <header id="modal-label"><!-- Header --><i class="fa fa-bar-chart">&nbsp;</i>More stats</header>
+            <div class="modal-content"><!-- The modals content --><div id="chartContainer" style="height: 300px; width: 100%;">
+                <script type='text/javascript' src='js/canvas-charts.js'></script></div>
+</div>
+        </div>
+        <a href="#!" class="modal-close" title="Close this modal" data-close="Close" data-dismiss="modal">?</a>
+    </section>
+    <a id="modal-link" href="#modal-text"></a>
 
     <script>
         //Initialize map
@@ -73,6 +86,14 @@
                 window.open('https://github.com/duenni/beermap');
             },
             'Github'
+        )
+        
+        //EasyButton more stats
+        L.easyButton('fa fa-bar-chart', 
+            function (){
+                $('#modal-link')[0].click();
+            },
+            'More stats'
         )
         //Use kimonolabs for scraping 
         $.ajax({

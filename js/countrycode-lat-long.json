@@ -1,3 +1,5 @@
+//Generated 05/2015 from https://opendata.socrata.com/dataset/Country-List-ISO-3166-Codes-Latitude-Longitude/mnkm-8ram
+//This file is not needed but here for reference
 markers = [
   {
     "name":"Afghanistan",

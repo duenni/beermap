@@ -1,241 +1,201 @@
 markers = [
   {
-    "name":"argentinien",
-    "anzahl":1,
+    "name":"argentinien",  
     "lat":-34,
     "long":-64
   },
   {
     "name":"australien",
-    "anzahl":6,
     "lat":-27,
     "long":133
   },
   {
     "name":"belgien",
-    "anzahl":16,
     "lat":50.8333,
     "long":4
   },
   {
     "name":"brasilien",
-    "anzahl":1,
     "lat":-10,
     "long":-55
   },
   {
     "name":"china",
-    "anzahl":1,
     "lat":35,
     "long":105
   },
   {
     "name":"daenemark",
-    "anzahl":5,
     "lat":56,
     "long":10
   },
   {
     "name":"deutschland",
-    "anzahl":836,
     "lat":51,
     "long":9
   },
   {
     "name":"england",
-    "anzahl":41,
     "lat":54,
     "long":-2
   },
   {
     "name":"estland",
-    "anzahl":1,
     "lat":59,
     "long":26
   },
   {
     "name":"finnland",
-    "anzahl":1,
     "lat":64,
     "long":26
   },
   {
     "name":"frankreich",
-    "anzahl":4,
     "lat":46,
     "long":2
   },
   {
     "name":"griechenland",
-    "anzahl":1,
     "lat":39,
     "long":22
   },
   {
     "name":"indien",
-    "anzahl":3,
     "lat":20,
     "long":77
   },
   {
     "name":"irland",
-    "anzahl":6,
     "lat":53,
     "long":-8
   },
   {
     "name":"italien",
-    "anzahl":4,
     "lat":42.8333,
     "long":12.8333
   },
   {
     "name":"jamaika",
-    "anzahl":1,
     "lat":18.25,
     "long":-77.5
   },
   {
     "name":"kanada",
-    "anzahl":9,
     "lat":60,
     "long":-95
   },
   {
     "name":"kuba",
-    "anzahl":1,
     "lat":21.5,
     "long":-80
   },
   {
     "name":"nepal",
-    "anzahl":1,
     "lat":28,
     "long":84
   },
   {
     "name":"niederlande",
-    "anzahl":16,
     "lat":52.5,
     "long":5.75
   },
   {
     "name":"norwegen",
-    "anzahl":6,
     "lat":62,
     "long":10
   },
   {
     "name":"oesterreich",
-    "anzahl":33,
     "lat":47.3333,
     "long":13.3333
   },
   {
     "name":"polen",
-    "anzahl":5,
     "lat":52,
     "long":20
   },
   {
     "name":"portugal",
-    "anzahl":2,
     "lat":39.5,
     "long":-8
   },
   {
     "name":"russland",
-    "anzahl":4,
     "lat":60,
     "long":100
   },
   {
     "name":"schottland",
-    "anzahl":16,
     "lat":56.9542,
     "long":-3.7843
   },
   {
     "name":"schweden",
-    "anzahl":2,
     "lat":62,
     "long":15
   },
   {
     "name":"schweiz",
-    "anzahl":1,
     "lat":47,
     "long":8
   },
   {
     "name":"serbien",
-    "anzahl":1,
     "lat":44,
     "long":21
   },
   {
     "name":"singapur",
-    "anzahl":1,
     "lat":1.3667,
     "long":103.8
   },
   {
     "name":"slowakei",
-    "anzahl":1,
     "lat":48.6667,
     "long":19.5
   },
   {
     "name":"spanien",
-    "anzahl":3,
     "lat":40,
     "long":-4
   },
   {
     "name":"suedafrika",
-    "anzahl":1,
     "lat":-29,
     "long":24
   },
   {
     "name":"thailand",
-    "anzahl":6,
     "lat":15,
     "long":100
   },
   {
     "name":"tschechien",
-    "anzahl":43,
     "lat":49.75,
     "long":15.5
   },
   {
     "name":"tuerkei",
-    "anzahl":1,
     "lat":39,
     "long":35
   },
   {
     "name":"ungarn",
-    "anzahl":18,
     "lat":47,
     "long":20
   },
   {
     "name":"usa",
-    "anzahl":18,
     "lat":38,
     "long":-97
   },
   {
     "name":"venezuela",
-    "anzahl":1,
     "lat":8,
     "long":-66
   },
   {
     "name":"weissrussland",
-    "anzahl":1,
     "lat":53,
     "long":28
   }

@@ -9,7 +9,7 @@ function makeChart() {
             var finals = [];
             for(var i = 0; i < collection.length; i++)
             {
-                finals.push({ 'y': collection[i].anzahl, 'label': collection[i].sorte.text });
+                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte.text });
             }
                     
             var chart = new CanvasJS.Chart("chartContainer",{

@@ -44,9 +44,11 @@
     <section class="modal--show" id="modal-text" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
         <div class="modal-inner">
             <header id="modal-label"><!-- Header --><i class="fa fa-bar-chart">&nbsp;</i>More stats</header>
-            <div class="modal-content"><!-- The modals content --><div id="chartContainer" style="height: 300px; width: 100%;">
+            <div class="modal-content"><!-- The modals content -->
+                <div id="chartContainer" style="height: 300px; width: 100%;">
                 <script type='text/javascript' src='js/canvas-charts.js'></script></div>
-</div>
+                <div id="sum"></div>
+            </div>
         </div>
         <a href="#!" class="modal-close" title="Close this modal" data-close="Close" data-dismiss="modal">?</a>
     </section>
@@ -106,7 +108,7 @@
             // If the call request was successful and the data was retrieved, this function will create a list displaying the data
          
                 var collection = response.results.bierherkunft;
-                for (var i=0; i < markers.length; ++i) 
+                for (var i=0; i < markers.length; i++) 
                 {
                     for (var i = 0; i < collection.length; i++)
                     {   
@@ -114,7 +116,13 @@
                         .bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[i].name.href+'>'+collection[i].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[i].anzahl)
                         .addTo(map);
                     }
-                }            
+                }
+                var sum = 0;
+                for( var i = 0; i < collection.length; i++ ) {
+                    sum += parseInt(collection[i].anzahl);
+                }
+                $( "#sum" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum );
+                
             }
         }); 
     </script>

@@ -117,12 +117,13 @@
                         .addTo(map);
                     }
                 }
+                //Calculate sum of all beers
                 var sum = 0;
-                for( var i = 0; i < collection.length; i++ ) {
+                for( var i = 0; i < collection.length; i++ ) 
+                {
                     sum += parseInt(collection[i].anzahl);
                 }
                 $( "#sum" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum );
-                
             }
         }); 
     </script>

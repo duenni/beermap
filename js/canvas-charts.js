@@ -9,7 +9,7 @@ function makeChart() {
             var finals = [];
             for(var i = 0; i < collection.length; i++)
             {
-                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte.text });
+                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte.text, 'link': collection[i].sorte.href });
             }
                     
             var chart = new CanvasJS.Chart("chartContainer",{
@@ -21,6 +21,7 @@ function makeChart() {
                 data: [
                 {
                     type: "pie",
+                    toolTipContent: '<a target="_blank" href={link}>{label}</a> <br> Anzahl: {y}',
                     dataPoints: finals
                 }
                 ]

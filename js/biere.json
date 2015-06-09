@@ -1,5 +1,10 @@
 markers = [
   {
+    "name":"äthiopien",  
+    "lat":9.1491,
+    "long":40.4993
+  },
+  {
     "name":"argentinien",  
     "lat":-34,
     "long":-64

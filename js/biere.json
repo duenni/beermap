@@ -87,7 +87,7 @@ markers = [
   {
     "name":"kanada",
     "lat":60,
-    "long":-95
+    "long":-112
   },
   {
     "name":"kuba",
@@ -95,7 +95,7 @@ markers = [
     "long":-80
   },
   {
-    "name":"Mexiko",
+    "name":"mexiko",
     "lat":23,
     "long":-102
   },

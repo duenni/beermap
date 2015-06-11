@@ -1,6 +1,6 @@
 # beermap
 
-This project scrapes DokuWiki pages from a private wiki project. The resulting data is visualized in a world map.
+This project scrapes DokuWiki pages from a private wiki. The resulting data is visualized in a world map.
 
 # Credit
 The following awesome projects were used to realize this:

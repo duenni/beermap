@@ -1,3 +1,13 @@
 # beermap
 
-This project scrapes a DokuWiki page with help from [kimonolabs] (https://www.kimonolabs.com). The resulting data is displayed in a map marker. The map is generated with [Leaflet](http://leafletjs.com/). [EasyButton] (https://github.com/CliffCloud/Leaflet.EasyButton) and [FontAwesome] (http://fontawesome.io/) are used here, too.
+This project scrapes DokuWiki pages from a private wiki project. The resulting data is visualized in a world map.
+
+# Credit
+The following awesome projects were used to realize this:
+* [kimonolabs] (https://www.kimonolabs.com)
+* [Leaflet](http://leafletjs.com/)
+* Tile layer from [Mapbox] (https://www.mapbox.com/)
+* [EasyButton] (https://github.com/CliffCloud/Leaflet.EasyButton)
+* [FontAwesome] (http://fontawesome.io/)
+* [CSS Modals] (https://github.com/drublic/css-modal)
+* [CanvasJS] (http://canvasjs.com/)

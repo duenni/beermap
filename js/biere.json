@@ -185,6 +185,11 @@ markers = [
     "long":24
   },
   {
+    "name":"tahiti",
+    "lat":-17.6430,
+    "long":-149.4253
+  },
+  {
     "name":"thailand",
     "lat":15,
     "long":100

@@ -75,6 +75,11 @@ markers = [
     "long":-8
   },
   {
+    "name":"israel",
+    "lat":31.3000,
+    "long":34.4500
+  },
+  {
     "name":"italien",
     "lat":42.8333,
     "long":12.8333

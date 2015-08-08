@@ -50,6 +50,11 @@ markers = [
     "long":26
   },
   {
+    "name":"faröer-inseln",
+    "lat":62.1519,
+    "long":-6.9800
+  },
+  {
     "name":"finnland",
     "lat":64,
     "long":26

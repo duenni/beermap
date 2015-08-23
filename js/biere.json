@@ -40,6 +40,11 @@ markers = [
     "long":9
   },
   {
+    "name":"dominikanische republik",
+    "lat":19,
+    "long":-70.6667
+  },
+  {
     "name":"england",
     "lat":54,
     "long":-2

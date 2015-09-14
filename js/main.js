@@ -24,7 +24,7 @@ L.easyButton('fa fa-beer',
         window.open('http://www.massafaka.at/massawiki/doku.php?id=bierstats:uebersicht');
     },
  'Bieruebersicht'
-)
+).addTo(map);
 
 //EasyButton Github
 L.easyButton('fa fa-github', 
@@ -32,7 +32,7 @@ L.easyButton('fa fa-github',
         window.open('https://github.com/duenni/beermap');
     },
     'Github'
-)
+).addTo(map);
 
 //EasyButton more stats
 L.easyButton('fa fa-bar-chart', 
@@ -40,7 +40,8 @@ L.easyButton('fa fa-bar-chart',
         $('#modal-link')[0].click();
     },
     'More stats'
-)
+).addTo(map);
+
 //-----------------------------Kimono---------------------------------
 //Use kimonolabs for scraping 
 $.ajax({

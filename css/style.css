@@ -7,3 +7,22 @@ html, body, #map {
     height: 100%;
     width: 100%;
 }
+
+/*Override L.control.layers*/
+
+.leaflet-retina .leaflet-control-layers-toggle {
+    background-image: url("http://cdn.leafletjs.com/leaflet-0.7.5/images/layers-2x.png");
+    background-size: 16px 16px;
+}
+    
+.leaflet-control-layers-toggle {
+        background-image: url("http://cdn.leafletjs.com/leaflet-0.7.5/images/layers.png");
+        background-size: 16px 16px;
+        width: 26px;
+        height: 26px;
+}
+
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 30px;
+	height: 30px;
+	}

@@ -34,7 +34,7 @@ var map = new L.map('map', {
 });
 
 //Add Layer switcher to map
-L.control.layers(baseMaps).addTo(map);
+L.control.layers(baseMaps, null, {position: 'topleft'}).addTo(map);
 
 //Change marker icon
 var myIcon = L.icon({

@@ -1,11 +1,40 @@
 //-----------------------------Map stuff---------------------------------
+//Tile Provider
+var mapbox_streets = new L.tileLayer('https://{s}.tiles.mapbox.com/v4/duenni.847e1c91/{z}/{x}/{y}.png?access_token='+apikey.mapbox+'',{
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
+});
+
+var mapbox_satellite = new L.tileLayer('https://{s}.tiles.mapbox.com/v4/duenni.ng3a7ocm/{z}/{x}/{y}.png?access_token='+apikey.mapbox+'',{
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
+});
+
+var openstreetmap_mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+var hydda_base = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/base/{z}/{x}/{y}.png', {
+	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+//Base map
+var baseMaps = {
+    "Mapbox Streets": mapbox_streets,
+    "Mapbox Satellite": mapbox_satellite,
+    "OpenStreetMap Mapnik": openstreetmap_mapnik,
+    "Hydda Base": hydda_base
+};
+
 //Initialize map
 var map = new L.map('map', {
     center: [20.0, 5.0],
     zoom: 2,
     worldCopyJump: true,
-    layers: new L.tileLayer('https://{s}.tiles.mapbox.com/v4/duenni.847e1c91/{z}/{x}/{y}.png?access_token='+apikey.mapbox+'')
+    layers: [mapbox_streets]
 });
+
+//Add Layer switcher to map
+L.control.layers(baseMaps).addTo(map);
 
 //Change marker icon
 var myIcon = L.icon({
@@ -13,9 +42,6 @@ var myIcon = L.icon({
     iconRetinaUrl: './images/bier48.png',
     iconSize: [24, 24],
 });
-
-//Copyright information
-map.attributionControl.addAttribution('&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>');
 
 //-----------------------------EasyButton---------------------------------
 //EasyButton Wiki

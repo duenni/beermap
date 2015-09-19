@@ -17,6 +17,7 @@ html, body, #map {
     
 .leaflet-control-layers-toggle {
         background-image: url("http://cdn.leafletjs.com/leaflet-0.7.5/images/layers.png");
+        background-size: 16px 16px;
         width: 26px;
         height: 26px;
 }

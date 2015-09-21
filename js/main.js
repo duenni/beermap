@@ -8,6 +8,10 @@ var mapbox_satellite = new L.tileLayer('https://{s}.tiles.mapbox.com/v4/duenni.n
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
 });
 
+var mapbox_choropleth = new L.tileLayer('https://{s}.tiles.mapbox.com/v4/duenni.ngild633/{z}/{x}/{y}.png?access_token='+apikey.mapbox+'',{
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
+});
+
 var openstreetmap_mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -21,6 +25,7 @@ var hydda_base = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/base/{z}/{x
 var baseMaps = {
     "Mapbox Streets": mapbox_streets,
     "Mapbox Satellite": mapbox_satellite,
+    "Choropleth": mapbox_choropleth,
     "OpenStreetMap Mapnik": openstreetmap_mapnik,
     "Hydda Base": hydda_base
 };

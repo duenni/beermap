@@ -41,6 +41,9 @@ var map = new L.map('map', {
 //Add Layer switcher to map
 L.control.layers(baseMaps, null, {position: 'topleft'}).addTo(map);
 
+//Load GeoJSON file
+loadboundaries = L.geoJson(worldboundaries);
+
 //Change marker icon
 var myIcon = L.icon({
     iconUrl: './images/bier24.png',
@@ -74,6 +77,8 @@ L.easyButton('fa fa-bar-chart',
 ).addTo(map);
 
 //-----------------------------Kimono---------------------------------
+var marker;
+var markergroup = L.layerGroup();
 //Use kimonolabs for scraping 
 $.ajax({
     "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.kimonolabs,
@@ -89,9 +94,10 @@ $.ajax({
         {
             for (var i = 0; i < collection.length; i++)
             {   
-                L.marker( [markers[i].lat, markers[i].long], {icon: myIcon})
-                .bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[i].name.href+'>'+collection[i].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[i].anzahl)
-                .addTo(map);
+                //Iterate over all results and add them as markers to a layer group
+                marker = L.marker( [markers[i].lat, markers[i].long], {icon: myIcon});
+                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[i].name.href+'>'+collection[i].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[i].anzahl);
+                marker.addTo(markergroup);
             }
         }
         //Calculate sum of all beers
@@ -103,6 +109,23 @@ $.ajax({
         $( "#sum" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum );
     }
 }); 
+
+//Display marker group on initial load
+map.on('load', markergroup.addTo(map));
+
+//If selected layer is "Choropleth" display GeoJSON file
+map.on('baselayerchange', baseLayerChange);
+
+function baseLayerChange(event){
+    if (event.name == 'Choropleth') {
+        map.addLayer(loadboundaries);
+        map.removeLayer(markergroup);
+    }
+    else{
+        map.removeLayer(loadboundaries);
+        map.addLayer(markergroup);	    
+    }
+};
 
 //Modal content
 function makeChart() {  

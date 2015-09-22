@@ -21,6 +21,29 @@ var hydda_base = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/base/{z}/{x
 	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
+function getColor(d) {
+    return d > 1000 ? '#800026' :
+           d > 500  ? '#BD0026' :
+           d > 200  ? '#E31A1C' :
+           d > 100  ? '#FC4E2A' :
+           d > 50   ? '#FD8D3C' :
+           d > 20   ? '#FEB24C' :
+           d > 10   ? '#FED976' :
+                      '#FFEDA0';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+
 //Base map
 var baseMaps = {
     "Mapbox Streets": mapbox_streets,
@@ -42,7 +65,7 @@ var map = new L.map('map', {
 L.control.layers(baseMaps, null, {position: 'topleft'}).addTo(map);
 
 //Load GeoJSON file
-loadboundaries = L.geoJson(worldboundaries);
+loadboundaries = L.geoJson(worldboundaries, {style: style});
 
 //Change marker icon
 var myIcon = L.icon({

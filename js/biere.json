@@ -1,5 +1,10 @@
 markers = [
   {
+    "name":"aegypten",  
+    "lat":27,
+    "long":30
+  },
+  {
     "name":"aethiopien",  
     "lat":9.1491,
     "long":40.4993

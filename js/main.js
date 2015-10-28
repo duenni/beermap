@@ -21,29 +21,6 @@ var hydda_base = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/base/{z}/{x
 	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
-function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' :
-           d > 200  ? '#E31A1C' :
-           d > 100  ? '#FC4E2A' :
-           d > 50   ? '#FD8D3C' :
-           d > 20   ? '#FEB24C' :
-           d > 10   ? '#FED976' :
-                      '#FFEDA0';
-}
-
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.density),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}
-
-
 //Base map
 var baseMaps = {
     "Mapbox Streets": mapbox_streets,
@@ -63,9 +40,6 @@ var map = new L.map('map', {
 
 //Add Layer switcher to map
 L.control.layers(baseMaps, null, {position: 'topleft'}).addTo(map);
-
-//Load GeoJSON file
-loadboundaries = L.geoJson(worldboundaries, {style: style});
 
 //Change marker icon
 var myIcon = L.icon({
@@ -102,6 +76,7 @@ L.easyButton('fa fa-bar-chart',
 //-----------------------------Kimono---------------------------------
 var marker;
 var markergroup = L.layerGroup();
+var loadboundaries;
 //Use kimonolabs for scraping 
 $.ajax({
     "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.kimonolabs,
@@ -110,9 +85,10 @@ $.ajax({
     //Make a call to the Kimono API following the "url" 
 
     'success': function(response){ 
-    // If the call request was successful and the data was retrieved, this function will create a list displaying the data
- 
+        //write api response to var
         var collection = response.results.bierherkunft;
+        
+        //read biere.json and generate markers and popups
         for (var i=0; i < markers.length; i++) 
         {
             for (var i = 0; i < collection.length; i++)
@@ -123,6 +99,47 @@ $.ajax({
                 marker.addTo(markergroup);
             }
         }
+        
+        //---------------------------------Choropleth-----------------------------------------
+        //Load GeoJSON file with country borders
+        loadboundaries = L.geoJson(worldboundaries, {onEachFeature: onEachFeature});
+
+        //throws an error when setStyle is used on L.geoJson so we wait until its ready
+        loadboundaries.on('ready', loadboundaries.setStyle(function (feature) {
+            return {
+                fillColor: getColor(feature.properties.density),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.7
+            };
+        }));
+
+        //coloring the choropleth map
+        function getColor(d) {
+            return d > 1000 ? '#800026' :
+                   d > 100  ? '#BD0026' :
+                   d > 50   ? '#E31A1C' :
+                   d > 30   ? '#FC4E2A' :
+                   d > 20   ? '#FD8D3C' :
+                   d > 10   ? '#FEB24C' :
+                   d > 0    ? '#FED976' :
+                              '#FFEDA0';
+        }
+
+        //merge count data from api response so it can be used in getColor
+        function onEachFeature(feature, layer) {
+            feature.properties.density = 0;
+            for (i in collection) {
+                if(collection[i].name.text === feature.properties.name_de) {
+                    feature.properties.density = parseInt(collection[i].anzahl);
+                }
+              }
+              layer.bindPopup('<i class="fa fa-flag"></i> '+feature.properties.name_de+'<br> <i class="fa fa-slack"></i> '+feature.properties.density);
+        }
+        //-----------------------------Choropleth end----------------------------------
+        
         //Calculate sum of all beers
         var sum = 0;
         for( var i = 0; i < collection.length; i++ ) 
@@ -141,8 +158,8 @@ map.on('baselayerchange', baseLayerChange);
 
 function baseLayerChange(event){
     if (event.name == 'Choropleth') {
-        map.addLayer(loadboundaries);
         map.removeLayer(markergroup);
+        map.addLayer(loadboundaries);
     }
     else{
         map.removeLayer(loadboundaries);

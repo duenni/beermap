@@ -118,14 +118,14 @@ $.ajax({
 
         //coloring the choropleth map
         function getColor(d) {
-            return d > 1000 ? '#800026' :
-                   d > 100  ? '#BD0026' :
-                   d > 50   ? '#E31A1C' :
-                   d > 30   ? '#FC4E2A' :
-                   d > 20   ? '#FD8D3C' :
-                   d > 10   ? '#FEB24C' :
-                   d > 0    ? '#FED976' :
-                              '#FFEDA0';
+            return d > 1000 ? '#B10026' :
+                   d > 100  ? '#E31A1C' :
+                   d > 50   ? '#FC4E2A' :
+                   d > 30   ? '#FD8D3C' :
+                   d > 20   ? '#FEB24C' :
+                   d > 10   ? '#FED976' :
+                   d > 0    ? '#FFEDA0' :
+                              '#FFFFCC';
         }
 
         //merge count data from api response so it can be used in getColor

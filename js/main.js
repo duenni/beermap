@@ -138,6 +138,22 @@ $.ajax({
               }
               layer.bindPopup('<i class="fa fa-flag"></i> '+feature.properties.name_de+'<br> <i class="fa fa-slack"></i> '+feature.properties.density);
         }
+        
+        //legend for choropleth explaining color codes
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [1, 10, 20, 30, 50, 100, 1000],
+                labels = [];
+
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            }
+
+            return div;
+        };
         //-----------------------------Choropleth end----------------------------------
         
         //Calculate sum of all beers
@@ -156,15 +172,20 @@ map.on('load', markergroup.addTo(map));
 //If selected layer is "Choropleth" display GeoJSON file
 map.on('baselayerchange', baseLayerChange);
 
+//legend when choropleth is displayed
+var legend = L.control({position: 'bottomright'});
+
 function baseLayerChange(event){
     if (event.name == 'Choropleth') {
         map.removeLayer(markergroup);
         map.addLayer(loadboundaries);
+        legend.addTo(map);
     }
     else{
         map.removeLayer(loadboundaries);
-        map.addLayer(markergroup);	    
-    }
+        map.addLayer(markergroup);
+        legend.removeFrom(map);
+        }
 };
 
 //Modal content

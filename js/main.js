@@ -17,17 +17,12 @@ var openstreetmap_mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
-var hydda_base = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/base/{z}/{x}/{y}.png', {
-	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-});
-
 //Base map
 var baseMaps = {
     "Mapbox Streets": mapbox_streets,
     "Mapbox Satellite": mapbox_satellite,
-    "Choropleth": mapbox_choropleth,
     "OpenStreetMap Mapnik": openstreetmap_mapnik,
-    "Hydda Base": hydda_base
+    "Choropleth": mapbox_choropleth,
 };
 
 //Initialize map

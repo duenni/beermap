@@ -12,4 +12,4 @@ The following awesome projects were used to realize this:
 * [CSS Modals] (https://github.com/drublic/css-modal)
 * [CanvasJS] (http://canvasjs.com/)
 * [world.geo.json] (https://github.com/johan/world.geo.json)
-* [geojson.io] (geojson.io)
+* [geojson.io] (http://geojson.io)

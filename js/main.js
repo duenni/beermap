@@ -86,12 +86,16 @@ $.ajax({
         //read biere.json and generate markers and popups
         for (var i=0; i < markers.length; i++) 
         {
-            for (var i = 0; i < collection.length; i++)
-            {   
+            for (var j = 0; j < collection.length; j++)
+            {
+                //compare country names because it is possible that collection contains more countries than markers, don't place a marker if this is the case
+                if(markers[i].name === collection[j].name.text)
+                {
                 //Iterate over all results and add them as markers to a layer group
                 marker = L.marker( [markers[i].lat, markers[i].long], {icon: myIcon});
-                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[i].name.href+'>'+collection[i].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[i].anzahl);
+                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[j].name.href+'>'+collection[j].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[j].anzahl);
                 marker.addTo(markergroup);
+                }
             }
         }
         

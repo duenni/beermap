@@ -80,6 +80,11 @@ markers = [
     "long":22
   },
   {
+    "name":"honduras",
+    "lat":15,
+    "long":-86.5
+  },
+  {
     "name":"indien",
     "lat":20,
     "long":77

@@ -180,6 +180,11 @@ markers = [
     "long":-8
   },
   {
+    "name":"rumaenien",
+    "lat":46,
+    "long":25
+  },
+  {
     "name":"russland",
     "lat":60,
     "long":100

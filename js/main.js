@@ -83,6 +83,9 @@ $.ajax({
         //write api response to var
         var collection = response.results.bierherkunft;
         var drunkcountries = response.count;
+        var thisversionrun = response.thisversionrun;
+        var nextrun = response.nextrun;
+        var thisversionstatus = response.thisversionstatus;
         //read biere.json and generate markers and popups
         for (var i=0; i < markers.length; i++) 
         {
@@ -161,7 +164,7 @@ $.ajax({
         {
             sum += parseInt(collection[i].anzahl);
         }
-        $( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum + '<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries);
+        $( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum + '<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br> <i class="fa fa-clock-o">&nbsp;</i>Datenbestand von: ' + thisversionrun + '<br> <i class="fa fa-cogs">&nbsp;</i>Status letzter API-Lauf: ' + thisversionstatus + '<br> <i class="fa fa-refresh">&nbsp;</i>Nächster API-Lauf: ' + nextrun);
     }
 }); 
 

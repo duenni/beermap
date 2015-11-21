@@ -42,12 +42,20 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
     <div id="map"></div>
-    <div id="modal">
-        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-        <div id="stats"></div>
+    <div id="modal" class="modal" role="dialog" aria-labelledby="Modal title" aria-describedby="Modal description">
+        <div class="modal-content">
+            <div class="header"><i class="fa fa-bar-chart">&nbsp;</i>Stats</div>
+            <div class="copy">
+                <p>
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    <div id="stats"></div>
+                </p>
+                <a href="#" class="modalcss-button button-secondary">Close</a> 
+            </div>
+        </div>
+        <div class="overlay"></div>
     </div>
-    <a href="#modal"></a>
-    
+    <a id="modal-link" href="#modal"></a>
     <script src='js/main.js'></script>
     
     <!-- End Document

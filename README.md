@@ -4,7 +4,8 @@ This project scrapes DokuWiki pages from a private wiki. The resulting data is v
 
 # Credit
 The following awesome projects were used to realize this:
-* [kimonolabs] (https://www.kimonolabs.com)
+* ~~[kimonolabs] (https://www.kimonolabs.com)~~ Thanks for shutting down your service and announce this less than 2 weeks before!
+* [import.io] (https://import.io/)
 * [Leaflet](http://leafletjs.com/)
 * Tile layer from [Mapbox] (https://www.mapbox.com/) & [OpenStreetMap] (http://www.openstreetmap.org)
 * [EasyButton] (https://github.com/CliffCloud/Leaflet.EasyButton)

@@ -68,37 +68,38 @@ L.easyButton('fa fa-bar-chart',
     'More stats'
 ).addTo(map);
 
-//-----------------------------Kimono---------------------------------
+//-----------------------------import.io---------------------------------
 var marker;
 var markergroup = L.layerGroup();
 var loadboundaries;
-//Use kimonolabs for scraping 
+//Use import.io for scraping 
 $.ajax({
-    "url":"https://www.kimonolabs.com/api/6qium7f6?apikey="+apikey.kimonolabs,
+    "url":"https://api.import.io/store/connector/f5965414-facd-4703-9b4c-f1b41c036954/_query?input=webpage/url:http%3A%2F%2Fwww.massafaka.at%2Fmassawiki%2Fdoku.php%3Fid%3Dbierstats%3Aherkunft&&_apikey="+apikey.importio,
     "crossDomain": true,
-    "dataType": "jsonp",
-    //Make a call to the Kimono API following the "url" 
+    "dataType": "json",
+    //Make a call to the import.io api following the "url" 
 
     'success': function(response){ 
         //write api response to var
-        var collection = response.results.bierherkunft;
-        var drunkcountries = response.count;
-        var thisversionrun = response.thisversionrun;
-        var nextrun = response.nextrun;
-        var thisversionstatus = response.thisversionstatus;
+        var collection = response.results;
+        //var drunkcountries = response.count;
+        //var thisversionrun = response.thisversionrun;
+        //var nextrun = response.nextrun;
+        //var thisversionstatus = response.thisversionstatus;
         //read biere.json and generate markers and popups
+        console.log(collection);
         for (var i=0; i < markers.length; i++) 
         {
             for (var j = 0; j < collection.length; j++)
             {
                 //compare country names because it is possible that collection contains more countries than markers, don't place a marker if this is the case
-                if(markers[i].name === collection[j].name.text)
+                if(markers[i].name === collection[j].land)
                 {
                 //Iterate over all results and add them as markers to a layer group
                 marker = L.marker( [markers[i].lat, markers[i].long], {icon: myIcon});
-                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[j].name.href+'>'+collection[j].name.text+'</a> <br> <i class="fa fa-slack"></i> '+collection[j].anzahl);
+                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[j].link+'>'+collection[j].land+'</a> <br> <i class="fa fa-slack"></i> '+collection[j].anzahl);
                 marker.addTo(markergroup);
-                }
+            }
             }
         }
         
@@ -134,7 +135,7 @@ $.ajax({
         function onEachFeature(feature, layer) {
             feature.properties.density = 0;
             for (i in collection) {
-                if(collection[i].name.text === feature.properties.name_de) {
+                if(collection[i].land === feature.properties.name_de) {
                     feature.properties.density = parseInt(collection[i].anzahl);
                 }
               }
@@ -164,7 +165,7 @@ $.ajax({
         {
             sum += parseInt(collection[i].anzahl);
         }
-        $( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum + '<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br> <i class="fa fa-clock-o">&nbsp;</i>Datenbestand von: ' + thisversionrun + '<br> <i class="fa fa-cogs">&nbsp;</i>Status letzter API-Lauf: ' + thisversionstatus + '<br> <i class="fa fa-refresh">&nbsp;</i>Nächster API-Lauf: ' + nextrun);
+        $( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum);//'<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br> <i class="fa fa-clock-o">&nbsp;</i>Datenbestand von: ' + thisversionrun + '<br> <i class="fa fa-cogs">&nbsp;</i>Status letzter API-Lauf: ' + thisversionstatus + '<br> <i class="fa fa-refresh">&nbsp;</i>Nächster API-Lauf: ' + nextrun);
     }
 }); 
 

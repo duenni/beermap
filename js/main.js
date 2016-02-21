@@ -194,16 +194,16 @@ function baseLayerChange(event){
 //Modal content
 function makeChart() {  
     $.ajax({
-        url:"https://www.kimonolabs.com/api/ba3gx8yk?apikey="+apikey.kimonolabs,
+        url:"https://api.import.io/store/connector/d05d3ef8-0bee-4c06-b1c6-63d84d8b63be/_query?input=webpage/url:http%3A%2F%2Fwww.massafaka.at%2Fmassawiki%2Fdoku.php%3Fid%3Dbierstats%3Asorten&&_apikey="+apikey.importio,
         crossDomain: true,
-        dataType: "jsonp",
+        dataType: "json",
         success: function (response) {
             //If calling the API was successful create a canvasjs chart
-            var collection = response.results.biersorten;
+            var collection = response.results;
             var finals = [];
             for(var i = 0; i < collection.length; i++)
             {
-                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte.text, 'link': collection[i].sorte.href });
+                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte, 'link': collection[i].link });
             }
                     
             var chart = new CanvasJS.Chart("chartContainer",{

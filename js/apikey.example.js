@@ -1,5 +1,4 @@
-//Get your API key at kimonolabs.com
 apikey = {
-    kimonolabs:"YOURAPIKEYHERE",
+    importio:"YOURAPIKEYHERE",
     mapbox: "MAPBOXACCESSTOKENHERE"
 }; 

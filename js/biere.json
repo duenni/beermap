@@ -285,6 +285,11 @@ markers = [
     "long":-66
   },
   {
+    "name":"wales",
+    "lat":52.24,
+    "long":-3.77
+  },
+  {
     "name":"weissrussland",
     "lat":53,
     "long":28

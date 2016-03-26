@@ -95,6 +95,11 @@ markers = [
     "long":-8
   },
   {
+    "name":"island",
+    "lat":65.00,
+    "long":-18.00
+  },
+  {
     "name":"israel",
     "lat":31.3000,
     "long":34.4500

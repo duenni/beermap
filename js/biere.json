@@ -75,6 +75,11 @@ markers = [
     "long":2
   },
   {
+    "name":"ghana",
+    "lat":8,
+    "long":-2
+  },
+  {
     "name":"griechenland",
     "lat":39,
     "long":22
@@ -168,6 +173,11 @@ markers = [
     "name":"niederlande",
     "lat":52.5,
     "long":5.75
+  },
+  {
+    "name":"nigeria",
+    "lat":10,
+    "long":8
   },
   {
     "name":"norwegen",

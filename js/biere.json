@@ -15,6 +15,11 @@ markers = [
     "long":-64
   },
   {
+    "name":"armenien",
+    "lat":40,
+    "long":45
+  },
+  {
     "name":"australien",
     "lat":-27,
     "long":133

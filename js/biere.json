@@ -100,6 +100,11 @@ markers = [
     "long":77
   },
   {
+    "name":"indonesien",
+    "lat":-5,
+    "long":120
+  },
+  {
     "name":"irland",
     "lat":53,
     "long":-8
@@ -153,6 +158,11 @@ markers = [
     "name":"malaysia",
     "lat":2.5,
     "long":112.5
+  },
+  {
+    "name":"mauritius",
+    "lat":-20.2833,
+    "long":57.55
   },
   {
     "name":"mexiko",

@@ -295,6 +295,11 @@ markers = [
     "long":100
   },
   {
+    "name":"trinidad und tobago",
+    "lat":11,
+    "long":-61
+  },
+  {
     "name":"tschechien",
     "lat":49.75,
     "long":15.5

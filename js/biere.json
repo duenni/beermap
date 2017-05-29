@@ -290,6 +290,11 @@ markers = [
     "long":-149.4253
   },
   {
+    "name":"tansania",
+    "lat":-6,
+    "long":35
+  },
+  {
     "name":"thailand",
     "lat":15,
     "long":100

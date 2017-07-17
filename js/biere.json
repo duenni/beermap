@@ -90,6 +90,11 @@ markers = [
     "long":22
   },
   {
+    "name":"grönland",
+    "lat":72,
+    "long":-40
+  },
+  {
     "name":"honduras",
     "lat":15,
     "long":-86.5

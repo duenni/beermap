@@ -275,6 +275,11 @@ markers = [
     "long":-4
   },
   {
+    "name":"sri lanka",
+    "lat":7,
+    "long":81
+  },
+  {
     "name":"suedafrika",
     "lat":-29,
     "long":24

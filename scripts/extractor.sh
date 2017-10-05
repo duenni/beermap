@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Wiki beermap stat generator
+# Run this file in crontab to generate up to date statfiles country.json & style.json in OUTDIR
 
 WGET="/usr/local/bin/wget -qO-"
 WIKI_PREFIX="http://www.massafaka.at/massawiki"

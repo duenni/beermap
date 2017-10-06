@@ -68,7 +68,7 @@ L.easyButton('fa fa-bar-chart',
     'More stats'
 ).addTo(map);
 
-//-----------------------------import.io---------------------------------
+//-----------------------------place marker---------------------------------
 var marker;
 var markergroup = L.layerGroup();
 var loadboundaries;
@@ -145,7 +145,7 @@ legend.onAdd = function (map) {
 
     return div;
 };
-        //-----------------------------Choropleth end----------------------------------
+//-----------------------------Choropleth end----------------------------------
         
 //Calculate sum of all beers
 var sum = 0;

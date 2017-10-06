@@ -3,13 +3,13 @@
 # Wiki beermap stat generator
 # Run this file in crontab to generate up to date statfiles country.json & style.json in OUTDIR
 
-WGET="/usr/local/bin/wget -qO-"
+WGET="/usr/bin/wget -qO-"
 WIKI_PREFIX="http://www.massafaka.at/massawiki"
 WIKI_COUNTRY_URL="${WIKI_PREFIX}/doku.php?id=bierstats:herkunft"
 WIKI_STYLE_URL="${WIKI_PREFIX}/doku.php?id=bierstats:sorten"
 CONTENT_PATTERN="<td class=\"inline\""
 
-OUTDIR="../js/"
+OUTDIR="$HOME/html/beermap/js/"
 FLAG=false
 
 generate_json ()

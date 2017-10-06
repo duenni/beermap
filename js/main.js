@@ -86,7 +86,7 @@ var loadboundaries;
                 {
                 //Iterate over all results and add them as markers to a layer group
                 marker = L.marker( [markers[i].lat, markers[i].long], {icon: myIcon});
-                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+country[j].link+'>'+country[j].name+'</a> <br> <i class="fa fa-slack"></i> '+country[j].anzahl);
+                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+country[j].href+'>'+country[j].name+'</a> <br> <i class="fa fa-slack"></i> '+country[j].anzahl);
                 marker.addTo(markergroup);
             }
             }

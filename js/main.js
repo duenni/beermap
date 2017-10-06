@@ -72,97 +72,88 @@ L.easyButton('fa fa-bar-chart',
 var marker;
 var markergroup = L.layerGroup();
 var loadboundaries;
-//Use import.io for scraping 
-$.ajax({
-    "url":"https://api.import.io/store/connector/f5965414-facd-4703-9b4c-f1b41c036954/_query?input=webpage/url:http%3A%2F%2Fwww.massafaka.at%2Fmassawiki%2Fdoku.php%3Fid%3Dbierstats%3Aherkunft&&_apikey="+apikey.importio,
-    "crossDomain": true,
-    "dataType": "json",
-    
-    //Make a call to the import.io api following the "url" 
-    'success': function(response){ 
-        //write api response to var
-        var collection = response.results;
-        var drunkcountries = collection.length;
-        for (var i=0; i < markers.length; i++) 
+var drunkcountries = country.length;
+
+for (var i=0; i < markers.length; i++) 
+{
+    for (var j = 0; j < country.length; j++)
+    {
+        //compare country names because it is possible that collection contains more countries than markers, don't place a marker if this is the case
+        if(markers[i].name === country[j].name)
         {
-            for (var j = 0; j < collection.length; j++)
-            {
-                //compare country names because it is possible that collection contains more countries than markers, don't place a marker if this is the case
-                if(markers[i].name === collection[j].land)
-                {
-                //Iterate over all results and add them as markers to a layer group
-                marker = L.marker( [markers[i].lat, markers[i].long], {icon: myIcon});
-                marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+collection[j].link+'>'+collection[j].land+'</a> <br> <i class="fa fa-slack"></i> '+collection[j].anzahl);
-                marker.addTo(markergroup);
-            }
+            //Iterate over all results and add them as markers to a layer group
+            marker = L.marker( [markers[i].lat, markers[i].long], {icon: myIcon});
+            marker.bindPopup('<i class="fa fa-flag"></i> <a target="_blank" href='+country[j].href+'>'+country[j].name+'</a> <br> <i class="fa fa-slack"></i> '+country[j].anzahl);
+            marker.addTo(markergroup);
+        }
+    }
+}
+//---------------------------------Choropleth-----------------------------------------
+//Load GeoJSON file with country borders
+loadboundaries = L.geoJson(worldboundaries, {onEachFeature: onEachFeature});
+
+//throws an error when setStyle is used on L.geoJson so we wait until its ready
+loadboundaries.on('ready', loadboundaries.setStyle(function (feature) {
+    return {
+    fillColor: getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}));
+
+//coloring the choropleth map
+function getColor(d) {
+    return d > 1000 ? '#B10026' :
+           d > 100  ? '#E31A1C' :
+           d > 50   ? '#FC4E2A' :
+           d > 30   ? '#FD8D3C' :
+           d > 20   ? '#FEB24C' :
+           d > 10   ? '#FED976' :
+           d > 0    ? '#FFEDA0' :
+                      '#FFFFCC';
+}
+
+//merge count data from api response so it can be used in getColor
+function onEachFeature(feature, layer) {
+    feature.properties.density = 0;
+        for (i in country) {
+            if(country[i].name === feature.properties.name_de) {
+                feature.properties.density = parseInt(country[i].anzahl);
             }
         }
-        
-        //---------------------------------Choropleth-----------------------------------------
-        //Load GeoJSON file with country borders
-        loadboundaries = L.geoJson(worldboundaries, {onEachFeature: onEachFeature});
+        layer.bindPopup('<i class="fa fa-flag"></i> '+feature.properties.name_de+'<br> <i class="fa fa-slack"></i> '+feature.properties.density);
+}
 
-        //throws an error when setStyle is used on L.geoJson so we wait until its ready
-        loadboundaries.on('ready', loadboundaries.setStyle(function (feature) {
-            return {
-                fillColor: getColor(feature.properties.density),
-                weight: 2,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.7
-            };
-        }));
+//legend when choropleth is displayed
+var legend = L.control({position: 'bottomright'});
 
-        //coloring the choropleth map
-        function getColor(d) {
-            return d > 1000 ? '#B10026' :
-                   d > 100  ? '#E31A1C' :
-                   d > 50   ? '#FC4E2A' :
-                   d > 30   ? '#FD8D3C' :
-                   d > 20   ? '#FEB24C' :
-                   d > 10   ? '#FED976' :
-                   d > 0    ? '#FFEDA0' :
-                              '#FFFFCC';
-        }
+//legend for choropleth explaining color codes
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+    grades = [1, 10, 20, 30, 50, 100, 1000],
+    labels = [];
 
-        //merge count data from api response so it can be used in getColor
-        function onEachFeature(feature, layer) {
-            feature.properties.density = 0;
-            for (i in collection) {
-                if(collection[i].land === feature.properties.name_de) {
-                    feature.properties.density = parseInt(collection[i].anzahl);
-                }
-              }
-              layer.bindPopup('<i class="fa fa-flag"></i> '+feature.properties.name_de+'<br> <i class="fa fa-slack"></i> '+feature.properties.density);
-        }
-        
-        //legend for choropleth explaining color codes
-        legend.onAdd = function (map) {
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [1, 10, 20, 30, 50, 100, 1000],
-                labels = [];
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+        '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
 
-            // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < grades.length; i++) {
-                div.innerHTML +=
-                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-            }
-
-            return div;
-        };
+    return div;
+};
         //-----------------------------Choropleth end----------------------------------
         
-        //Calculate sum of all beers
-        var sum = 0;
-        for( var i = 0; i < collection.length; i++ ) 
-        {
-            sum += parseInt(collection[i].anzahl);
-        }
-        $( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum +'<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br>');
-    }
-}); 
+//Calculate sum of all beers
+var sum = 0;
+for( var i = 0; i < country.length; i++ ) 
+{
+    sum += parseInt(country[i].anzahl);
+}
+$( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum +'<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br>');
 
 //Display marker group on initial load
 map.on('load', markergroup.addTo(map));
@@ -170,8 +161,6 @@ map.on('load', markergroup.addTo(map));
 //If selected layer is "Choropleth" display GeoJSON file
 map.on('baselayerchange', baseLayerChange);
 
-//legend when choropleth is displayed
-var legend = L.control({position: 'bottomright'});
 
 function baseLayerChange(event){
     if (event.name == 'Choropleth') {
@@ -188,40 +177,27 @@ function baseLayerChange(event){
 
 //Modal content
 function makeChart() {  
-    $.ajax({
-        url:"https://api.import.io/store/connector/d05d3ef8-0bee-4c06-b1c6-63d84d8b63be/_query?input=webpage/url:http%3A%2F%2Fwww.massafaka.at%2Fmassawiki%2Fdoku.php%3Fid%3Dbierstats%3Asorten&&_apikey="+apikey.importio,
-        crossDomain: true,
-        dataType: "json",
-        success: function (response) {
-            //If calling the API was successful create a canvasjs chart
-            var collection = response.results;
-            var finals = [];
-            for(var i = 0; i < collection.length; i++)
-            {
-                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte, 'link': collection[i].link });
-            }
-                    
-            var chart = new CanvasJS.Chart("chartContainer",{
-                animationEnabled: true,
-                title:{
-                    text: "Biersorten"
-                },
-                
-                data: [
-                {
-                    type: "pie",
-                    toolTipContent: '<a target="_blank" href={link}>{label}</a> <br> Anzahl: {y}',
-                    dataPoints: finals
-                }
-                ]
-            });
-            chart.render();
-        },
-        error: function (xhr, status) {
-            //handle errors
+    var finals = [];
+    for(var i = 0; i < style.length; i++)
+        {
+            finals.push({ 'y': parseInt(style[i].anzahl), 'label': style[i].name, 'link': style[i].href });
         }
-    });
-}
+
+    var chart = new CanvasJS.Chart("chartContainer",{
+        animationEnabled: true,
+        title:{
+            text: "Biersorten"
+        },
+
+        data: [
+        {
+            type: "pie",
+            toolTipContent: '<a target="_blank" href={link}>{label}</a> <br> Anzahl: {y}',
+            dataPoints: finals
+        }]
+            });
+    chart.render();
+};
 
 //Only render the chart when modal gets clicked
 $(document).ready(function() {

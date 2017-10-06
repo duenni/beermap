@@ -183,17 +183,10 @@ function baseLayerChange(event){
 
 //Modal content
 function makeChart() {  
-    $.ajax({
-        url:"https://api.import.io/store/connector/d05d3ef8-0bee-4c06-b1c6-63d84d8b63be/_query?input=webpage/url:http%3A%2F%2Fwww.massafaka.at%2Fmassawiki%2Fdoku.php%3Fid%3Dbierstats%3Asorten&&_apikey="+apikey.importio,
-        crossDomain: true,
-        dataType: "json",
-        success: function (response) {
-            //If calling the API was successful create a canvasjs chart
-            var collection = response.results;
             var finals = [];
-            for(var i = 0; i < collection.length; i++)
+            for(var i = 0; i < style.length; i++)
             {
-                finals.push({ 'y': parseInt(collection[i].anzahl), 'label': collection[i].sorte, 'link': collection[i].link });
+                finals.push({ 'y': parseInt(style[i].anzahl), 'label': style[i].name, 'link': style[i].href });
             }
                     
             var chart = new CanvasJS.Chart("chartContainer",{
@@ -211,12 +204,7 @@ function makeChart() {
                 ]
             });
             chart.render();
-        },
-        error: function (xhr, status) {
-            //handle errors
         }
-    });
-}
 
 //Only render the chart when modal gets clicked
 $(document).ready(function() {

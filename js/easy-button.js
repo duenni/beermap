@@ -111,7 +111,8 @@ L.Control.EasyButton = L.Control.extend({
                                 //   icon: 'fa-circle',    // wrapped with <a>
                                 // }
 
-    leafletClasses:   true      // use leaflet styles for the button
+    leafletClasses:   true,     // use leaflet styles for the button
+    tagName:          'button',
   },
 
 
@@ -166,18 +167,25 @@ L.Control.EasyButton = L.Control.extend({
 
   _buildButton: function(){
 
-    this.button = L.DomUtil.create('button', '');
+    this.button = L.DomUtil.create(this.options.tagName, '');
 
+    // the next three if statements should be collapsed into the options 
+    // when it's time for breaking changes.
+    if (this.tagName === 'button') {
+        this.button.type = 'button';
+    }
+    
     if (this.options.id ){
       this.button.id = this.options.id;
     }
 
     if (this.options.leafletClasses){
-      L.DomUtil.addClass(this.button, 'easy-button-button leaflet-bar-part');
+      L.DomUtil.addClass(this.button, 'easy-button-button leaflet-bar-part leaflet-interactive');
     }
 
-    // don't let double clicks get to the map
+    // don't let double clicks and mousedown get to the map
     L.DomEvent.addListener(this.button, 'dblclick', L.DomEvent.stop);
+    L.DomEvent.addListener(this.button, 'mousedown', L.DomEvent.stop);
 
     // take care of normal clicks
     L.DomEvent.addListener(this.button,'click', function(e){

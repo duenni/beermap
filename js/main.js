@@ -171,7 +171,7 @@ function baseLayerChange(event){
     else{
         map.removeLayer(loadboundaries);
         map.addLayer(markergroup);
-        legend.removeFrom(map);
+        legend.remove(map);
         }
 };
 

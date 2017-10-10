@@ -46,7 +46,7 @@ generate_json style ${WIKI_STYLE_URL}
 
 
 for i in $(grep anzahl ${OUTDIR}/country.json|cut -d'"' -f4); do let country_beer_counter+=$i; done
-overall_counter=$(${WGET} ${WIKI_OVERVIEW_URL} | grep count overview.out | cut -d'>' -f2 | cut -d'<' -f1)
+overall_counter=$(${WGET} ${WIKI_OVERVIEW_URL} | grep count | cut -d'>' -f2 | cut -d'<' -f1)
 if [ ${overall_counter} -ne ${country_beer_counter} ]
 then
 	echo "ERROR: Anzahl Gesamtbiere stimmt nicht mit der \"Herkunfts-Summe\" überein"

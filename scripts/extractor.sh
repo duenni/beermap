@@ -11,7 +11,7 @@ WIKI_OVERVIEW_URL="${WIKI_PREFIX}:uebersicht"
 
 CONTENT_PATTERN="<td class=\"inline\""
 
-OUTDIR="$HOME/html/beermap/js"
+OUTDIR="$HOME/html/beermap/js/"
 FLAG=false
 
 country_beer_counter=0

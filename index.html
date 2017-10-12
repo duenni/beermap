@@ -27,7 +27,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="js/easy-button.js"></script>
     <script src='js/biere.json'></script>
-    <script src='js/canvasjs.min.js'></script>
+    <script src='js/chart.min.js'></script>
     <script src='js/apikey.js'></script>
     <script src='js/countries.geo.json'></script>
     <script src='js/country.json'></script>
@@ -50,7 +50,9 @@
             <div class="header"><i class="fa fa-bar-chart">&nbsp;</i>Stats</div>
             <div class="copy">
                 <p>
-                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    <div id="chartContainer" style="height: 300px; width: 100%;">
+                        <canvas id="myChart"></canvas>
+                    </div>
                     <div id="stats"></div>
                 </p>
                 <a href="#" class="modalcss-button button-secondary">Close</a> 

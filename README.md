@@ -9,6 +9,6 @@ The following awesome projects were used to realize this:
 * [EasyButton](https://github.com/CliffCloud/Leaflet.EasyButton)
 * [FontAwesome](http://fontawesome.io/)
 * [Modalcss](https://github.com/pedrolaxe/modalcss)
-* [CanvasJS](http://canvasjs.com/)
+* [Chart.js](http://www.chartjs.org/)
 * [world.geo.json](https://github.com/johan/world.geo.json)
 * [geojson.io](http://geojson.io)

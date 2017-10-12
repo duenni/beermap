@@ -208,10 +208,10 @@ function makeChart() {
         }],
       },
       options: {
-         responsive:true,
-         title: {
-             display: true,
-             text: 'Biersorten Top 10'
+        responsive:true,
+        title: {
+            display: true,
+            text: 'Biersorten Top 10'
         },
         legend: {display: false},
         tooltips: {

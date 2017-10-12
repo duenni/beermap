@@ -177,26 +177,50 @@ function baseLayerChange(event){
 
 //Modal content
 function makeChart() {  
-    var finals = [];
-    for(var i = 0; i < style.length; i++)
+    var ctx = document.getElementById("myChart");
+    var data = [];
+    var labels = [];
+    //Sort style array descending by anzahl and cut off after 10 elements afterwards
+    style.sort(function(a, b) {
+      return parseInt(b.anzahl) - parseInt(a.anzahl);
+    });
+    var styletop10 = style.slice(0,10);
+    for(var i = 0; i < styletop10.length; i++)
         {
-            finals.push({ 'y': parseInt(style[i].anzahl), 'label': style[i].name, 'link': style[i].href });
+            data.push(parseInt(styletop10[i].anzahl) );
+            labels.push(styletop10[i].name );
         }
-
-    var chart = new CanvasJS.Chart("chartContainer",{
-        animationEnabled: true,
-        title:{
-            text: "Biersorten"
+    var myPieChart = new Chart(ctx,{
+      type: 'horizontalBar',
+      data:{
+        labels: labels,
+        datasets: [{
+            label: labels,
+            //See https://google.github.io/palette.js/
+            //Tol's qualitative palette
+            //backgroundColor: ["rgb(51, 34, 136)","rgb(136, 204, 238)","rgb(68, 170, 153)","rgb(17, 119, 51)","rgb(153, 153, 51)","rgb(221, 204, 119)","rgb(102, 17, 0)","rgb(204, 102, 119)","rgb(136, 34, 85)","rgb(170, 68, 153)"],
+            //Tol's Sequential palette
+            //backgroundColor: ["rgb(102, 36, 4)","rgb(146, 48, 4)","rgb(194, 68, 6)","rgb(229, 97, 12)","rgb(247, 134, 28)","rgb(253, 174, 97)","rgb(255, 206, 101)","rgb(255, 231, 152)","rgb(255, 247, 197)","rgb(255, 255, 228)"],
+            //Tol's Rainbow palette
+            backgroundColor: ["rgb(120, 28, 129)","rgb(67, 50, 141)","rgb(65, 111, 184)","rgb(81, 156, 184)","rgb(112, 180, 132)","rgb(195, 186, 69)","rgb(224, 162, 57)","rgb(255, 231, 152)","rgb(230, 107, 45)","rgb(165, 0, 38)"],
+            data: data
+        }],
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Biersorten Top 10'
         },
-
-        data: [
-        {
-            type: "pie",
-            toolTipContent: '<a target="_blank" href={link}>{label}</a> <br> Anzahl: {y}',
-            dataPoints: finals
-        }]
-            });
-    chart.render();
+        legend: {display: false},
+        tooltips: {
+            callbacks: {
+                    label: function(tooltipItem) {
+                        return tooltipItem.xLabel;
+                    }
+            }
+        }
+    }
+  });
 };
 
 //Only render the chart when modal gets clicked

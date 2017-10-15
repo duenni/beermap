@@ -19,12 +19,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/modal.min.css">
     <link rel="stylesheet" href="css/easy-button.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Script
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="js/easy-button.js"></script>
     <script src='js/biere.json'></script>
     <script src='js/chart.min.js'></script>
@@ -50,9 +53,10 @@
             <div class="header"><i class="fa fa-bar-chart">&nbsp;</i>Stats</div>
             <div class="copy">
                 <p>
-                    <div id="chartContainer" style="height: 300px; width: 100%;">
-                        <canvas id="myChart"></canvas>
-                    </div>
+                 <div id="chartContainer" class="slickContainer">
+                     <div style="height: 300px; width: 100%;"><canvas id="myChartTop10"></canvas></div>
+                     <div style="height: 300px; width: 100%;"><canvas id="myChartBottom10"></canvas></div>
+                 </div>
                     <div id="stats"></div>
                 </p>
                 <a href="#" class="modalcss-button button-secondary">Close</a> 

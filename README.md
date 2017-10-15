@@ -10,5 +10,6 @@ The following awesome projects were used to realize this:
 * [FontAwesome](http://fontawesome.io/)
 * [Modalcss](https://github.com/pedrolaxe/modalcss)
 * [Chart.js](http://www.chartjs.org/)
+* [slick](https://github.com/kenwheeler/slick/)
 * [world.geo.json](https://github.com/johan/world.geo.json)
 * [geojson.io](http://geojson.io)

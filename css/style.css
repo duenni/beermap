@@ -8,6 +8,11 @@ html, body, #map {
     width: 100%;
 }
 
+.chartCanvas {
+    height: 300px; 
+    width: 100%;
+}
+
 /*Override L.control.layers*/
 
 .leaflet-retina .leaflet-control-layers-toggle {

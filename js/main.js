@@ -27,7 +27,7 @@ var baseMaps = {
 
 //Initialize map
 var map = new L.map('map', {
-    center: [20.0, 0.0],
+    center: [0.0, 0.0],
     zoom: 2,
     worldCopyJump: true,
     layers: [mapbox_streets]

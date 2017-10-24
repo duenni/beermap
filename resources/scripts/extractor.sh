@@ -11,7 +11,8 @@ WIKI_OVERVIEW_URL="${WIKI_PREFIX}:uebersicht"
 
 CONTENT_PATTERN="<td class=\"inline\""
 
-OUTDIR="."
+OUTDIR="$HOME/html/beermap/resources/data/"
+
 if [[ "${1}" = "-dir" ]] && [[ -n "${2}" ]]; then
 	if ls -ld ${2} >/dev/null 2>&1; then
 		OUTDIR=${2}

@@ -38,8 +38,8 @@ L.control.layers(baseMaps, null, {position: 'topleft'}).addTo(map);
 
 //Change marker icon
 var myIcon = L.icon({
-    iconUrl: './images/bier24.png',
-    iconRetinaUrl: './images/bier48.png',
+    iconUrl: 'resources/images/bier24.png',
+    iconRetinaUrl: 'resources/images/bier48.png',
     iconSize: [24, 24],
 });
 

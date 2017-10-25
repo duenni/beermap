@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Wiki beermap stat generator
-# Run this file in crontab to generate up to date statfiles country.json & style.json in OUTDIR
+# Run this file in crontab to generate up to date statfiles in OUTDIR and monitor for deleted objects
 
 WGET="/usr/bin/wget -qO-"
 WIKI_PREFIX="http://www.massafaka.at/massawiki/doku.php?id=bierstats"
@@ -12,7 +12,6 @@ WIKI_OVERVIEW_URL="${WIKI_PREFIX}:uebersicht"
 CONTENT_PATTERN="<td class=\"inline\""
 
 OUTDIR="$HOME/html/beermap/resources/data/"
-
 if [[ "${1}" = "-dir" ]] && [[ -n "${2}" ]]; then
 	if ls -ld ${2} >/dev/null 2>&1; then
 		OUTDIR=${2}
@@ -22,12 +21,13 @@ if [[ "${1}" = "-dir" ]] && [[ -n "${2}" ]]; then
 fi
 
 FLAG=false
+MAIL_FLAG=true
 
 country_beer_counter=0
 
-last_stat_file="${OUTDIR}/$(date +%Y -d yesterday).stats"
-act_stat_file="${OUTDIR}/$(date +%Y).stats"
-monthly_stat_file="${OUTDIR}/$(date +%Y -d yesterday)-monthly.stats"
+last_stat_file="${OUTDIR}/$(date +%Y -d yesterday)-stats.json"
+act_stat_file="${OUTDIR}/$(date +%Y)-stats.json"
+monthly_stat_file="${OUTDIR}/$(date +%Y -d yesterday)-monthly-stats.json"
 
 yesterday="$(date +%Y-%m-%d -d yesterday)"
 today="$(date +%Y-%m-%d)"
@@ -76,6 +76,7 @@ update_json_stats_file ()
 	else
 		if  grep "${2}" ${1} >/dev/null 2>&1; then
 			sed  -i -e "s#\(.*${2}.*:\).*#\1\"${3}\"#g" ${1}
+			MAIL_FLAG=false
 		else
 			sed -i -e "s#  }\$#  },#" -e "/]/d" ${1}
 			cat >> ${1} <<-EOF
@@ -91,7 +92,6 @@ update_json_stats_file ()
 # Create/UPADET stat files
 generate_json country ${WIKI_COUNTRY_URL}
 generate_json style ${WIKI_STYLE_URL}
-update_json_stats_file ${act_stat_file} ${today} ${overall_counter}
 
 # Check for alarms and create/UPADET monthly stat file on first day of month
 for i in $(grep anzahl ${OUTDIR}/country.json|cut -d'"' -f4); do let country_beer_counter+=${i}; done
@@ -103,9 +103,11 @@ then
 	echo "Anzahl \"Herkunfts-Summe\" : ${country_beer_counter}"
 fi >&2
 
+update_json_stats_file ${act_stat_file} ${today} ${overall_counter}
 
 if [ -f ${last_stat_file} ]; then
 	yesterday_counter=$(grep ${yesterday} ${last_stat_file} | cut -d'"' -f8)
+        [[ -z ${yesterday_counter} ]] && exit
 	if [ ${overall_counter} -lt ${yesterday_counter} ]; then
 		echo "SKANDAL, da hat jemand Bier(e) gelöscht"
 		echo "Anzahl gestern : ${yesterday_counter}"

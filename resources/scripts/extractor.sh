@@ -108,7 +108,7 @@ update_json_stats_file ${act_stat_file} ${today} ${overall_counter}
 if [ -f ${last_stat_file} ]; then
 	yesterday_counter=$(grep ${yesterday} ${last_stat_file} | cut -d'"' -f8)
         [[ -z ${yesterday_counter} ]] && exit
-	if [ ${overall_counter} -lt ${yesterday_counter} ]; then
+	if [ ${overall_counter} -lt ${yesterday_counter} ] && ${MAIL_FLAG}; then
 		echo "SKANDAL, da hat jemand Bier(e) gelöscht"
 		echo "Anzahl gestern : ${yesterday_counter}"
 		echo "Anzahl heute   : ${overall_counter}"

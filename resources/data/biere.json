@@ -35,6 +35,11 @@ markers = [
     "long":-55
   },
   {
+    "name":"bulgarien",
+    "lat":43,
+    "long":25
+  },
+  {
     "name":"china",
     "lat":35,
     "long":105

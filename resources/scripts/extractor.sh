@@ -114,5 +114,5 @@ if [ -f ${last_stat_file} ]; then
 		echo "Anzahl heute   : ${overall_counter}"
 	fi >&2
 	
-	[[ $(date +%d) -eq 1 ]] && update_json_stats_file ${monthly_stat_file} ${last_month} ${yesterday_counter}
+	[ $(date +%d) -eq 1 ] && update_json_stats_file ${monthly_stat_file} ${last_month} ${yesterday_counter}
 fi

@@ -202,7 +202,7 @@ function makeChartTop10() {
             //Tol's Sequential palette
             //backgroundColor: ["rgb(102, 36, 4)","rgb(146, 48, 4)","rgb(194, 68, 6)","rgb(229, 97, 12)","rgb(247, 134, 28)","rgb(253, 174, 97)","rgb(255, 206, 101)","rgb(255, 231, 152)","rgb(255, 247, 197)","rgb(255, 255, 228)"],
             //Tol's Rainbow palette
-            backgroundColor: ["rgb(120, 28, 129)","rgb(67, 50, 141)","rgb(65, 111, 184)","rgb(81, 156, 184)","rgb(112, 180, 132)","rgb(195, 186, 69)","rgb(224, 162, 57)","rgb(255, 231, 152)","rgb(230, 107, 45)","rgb(165, 0, 38)"],
+            backgroundColor: ["rgb(120, 28, 129)","rgb(67, 50, 141)","rgb(65, 111, 184)","rgb(81, 156, 184)","rgb(112, 180, 132)","rgb(195, 186, 69)","rgb(224, 162, 57)","rgb(255, 231, 152)","rgb(230, 107, 45)","rgb(165, 0, 38)","rgb(120, 28, 129)","rgb(67, 50, 141)","rgb(65, 111, 184)","rgb(81, 156, 184)"],
             data: data
         }],
       },
@@ -211,7 +211,7 @@ function makeChartTop10() {
         maintainAspectRatio: false,
         title: {
             display: true,
-            text: 'Biersorten Top 10'
+            text: 'Biersorten - Top 10'
         },
         legend: {display: false},
         tooltips: {
@@ -260,7 +260,7 @@ function makeChartBottom10() {
         maintainAspectRatio: false,
         title: {
             display: true,
-            text: 'Biersorten Bottom 10'
+            text: 'Biersorten - Bottom 10'
         },
         legend: {display: false},
         scales: {
@@ -281,6 +281,103 @@ function makeChartBottom10() {
   });
 };
 
+function makeChartUserStats() {
+    var ctx = document.getElementById("myChartUserStats");
+    var data = [];
+    var labels = [];
+    for(var i = 0; i < user.length; i++)
+        {
+            data.push(parseInt(user[i].anzahl));
+            labels.push(user[i].name);
+        }
+    var myPieChart = new Chart(ctx,{
+        type: 'bar',
+        data:{
+            labels: labels,
+            datasets: [{
+            label: labels,
+            //See https://google.github.io/palette.js/
+            //Tol's Rainbow palette
+            backgroundColor: ["rgb(120, 28, 129)","rgb(74, 35, 132)","rgb(63, 73, 157)","rgb(66, 115, 187)","rgb(76, 148, 191)","rgb(94, 169, 162)","rgb(118, 182, 125)","rgb(146, 189, 96)","rgb(177, 190, 78)","rgb(204, 183, 66)","rgb(223, 165, 57)","rgb(231, 132, 50)","rgb(228, 84, 42)","rgb(217, 33, 32)"],
+            data: data
+        }]
+        },
+        options: {
+          responsive:true,
+          maintainAspectRatio: true,
+          title: {
+              display: true,
+              text: 'User Stats - Neueinträge pro User'
+          },
+          legend: {display: false},
+          scales: {
+              yAxes: [{
+                  type: 'logarithmic',
+                  ticks: {
+                      beginAtZero:true//,
+                      //callback: function(tick, index, ticks) {
+                    //         return tick.toLocaleString()
+                     // }
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                  autoSkip: false
+                  }
+              }]
+          },
+          tooltips: {
+            callbacks: {
+                label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+                }
+            }
+          }
+        }
+    });
+};
+
+
+function makeChartYearStats() {
+    var ctx = document.getElementById("myChartYearStats");
+    var data = [];
+    var labels = [];
+    for(var i = 0; i < year.length; i++)
+        {
+            data.push(parseInt(year[i].anzahl));
+            labels.push(parseInt(year[i].jahr));
+        }
+    var myPieChart = new Chart(ctx,{
+      type: 'line',
+      data:{
+        labels: labels,
+        datasets: [{
+            label: labels,
+            borderColor: ["rgb(120, 28, 129)"],
+            //pointBackgroundColor: ["rgb(120, 28, 129)"],
+            data: data
+        }]
+      },
+      options: {
+          responsive:true,
+          maintainAspectRatio: false,
+          title: {
+              display: true,
+              text: 'Year Stats - Neueinträge pro Jahr'
+          },
+          legend: {display: false},
+          tooltips: {
+              callbacks: {
+                      label: function(tooltipItem) {
+                          return tooltipItem.yLabel;
+                      }
+              }
+          }
+      }
+ });
+
+};
+
 $(document).ready(function() {
     //Render the chart initially when modal link gets clicked
     var clickLink = document.getElementById("modal-link");
@@ -292,11 +389,14 @@ $(document).ready(function() {
     });
     //(Re-)Render charts when slides change
     $('.slickContainer').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-        if (currentSlide === 0)
-        {
-            makeChartBottom10();
-        } else {
+        if (currentSlide === 3){
             makeChartTop10();
+        } else if (currentSlide === 0){
+            makeChartBottom10();
+        } else if (currentSlide === 1){
+            makeChartUserStats();
+        } else {
+            makeChartYearStats();
         }
     });
 });

@@ -31,7 +31,7 @@ overall_beer_counter=0
 max_beer_counter=10000
 #max_beer_counter=10
 
-OUTDIR="."
+OUTDIR="$HOME/html/beermap/resources/data/"
 if [[ "${1}" = "-dir" ]] && [[ -n "${2}" ]]; then
 	if ls -ld ${2} >/dev/null 2>&1; then
 		OUTDIR=${2}

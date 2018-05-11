@@ -2,6 +2,7 @@
 
 # Wiki beermap stat generator
 # Run this file in crontab to generate up to date statfiles in OUTDIR and monitor for deleted objects
+# generates style.json & country.json & xxx-stats.json & xxx-monthly-stats.json
 
 WGET="/usr/bin/wget -qO-"
 WIKI_PREFIX="http://www.massafaka.at/massawiki/doku.php?id=bierstats"

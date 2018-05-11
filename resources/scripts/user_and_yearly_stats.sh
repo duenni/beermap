@@ -3,6 +3,7 @@
 echo "START: $(date +"%d.%m.%Y - %H:%M:%S")"
 
 # Wiki user & year stat generator
+#generates user.json & year.json
 
 #export http_proxy=http://139.7.95.77:8080/
 

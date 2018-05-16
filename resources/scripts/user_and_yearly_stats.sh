@@ -77,10 +77,11 @@ while read OVERVIEW_LINE; do
 	FOUND_USERS_LIST=""
 	FIRST_HIT=true
 #	echo "* $BEER_NAME"	
-#	echo "$BEER_LINK"
-	for curr_user_date in $(${WGET} ${BEER_LINK} | grep -E "${DETAIL_COMMENT_PATTERN}" | sed 's#.*id=bier:\([0-9a-z_]*\)".*\a> *\([0-9]*\)/.*#\1|\2#' | sed 's# #_#g'); do
+	#echo "$BEER_LINK"
 
-		curr_user=$(echo ${curr_user_date} | cut -d'|' -f1)
+	for curr_user_date in $(${WGET} ${BEER_LINK} |  sed  -n 's#.*<em><a href=.*nofollow">\([0-9a-zA-Z_]*\)</a> *\([0-9]*\)/.*#\1|\2#p' | sed 's# #_#g'); do
+	
+		curr_user=$(echo ${curr_user_date,,} | cut -d'|' -f1)
 		curr_date=$(echo ${curr_user_date} | cut -d'|' -f2)
 			
 		[[ -n "$(echo "${FOUND_USERS_LIST}" | grep "${curr_user}")" ]] && continue

@@ -79,7 +79,7 @@ while read OVERVIEW_LINE; do
 #	echo "* $BEER_NAME"	
 	#echo "$BEER_LINK"
 
-	for curr_user_date in $(${WGET} ${BEER_LINK} |  sed  -n 's#.*<em><a href=.*nofollow">\([0-9a-zA-Z_]*\)</a> *\([0-9]*\)/.*#\1|\2#p' | sed 's# #_#g'); do
+	for curr_user_date in $(${WGET} ${BEER_LINK} |  sed  -n 's#.*<em><a href=.*nofollow">\([0-9a-zA-Z_ ]*\)</a> *\([0-9]*\)/.*#\1|\2#p' | sed 's# #_#g'); do
 	
 		curr_user=$(echo ${curr_user_date,,} | cut -d'|' -f1)
 		curr_date=$(echo ${curr_user_date} | cut -d'|' -f2)

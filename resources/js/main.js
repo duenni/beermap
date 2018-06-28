@@ -307,7 +307,7 @@ function makeChartUserStats() {
           maintainAspectRatio: true,
           title: {
               display: true,
-              text: 'User Stats - Neueinträge pro User'
+              text: 'User Stats - Einträge pro User'
           },
           legend: {display: false},
           scales: {

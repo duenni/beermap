@@ -160,6 +160,11 @@ markers = [
     "long":-112
   },
   {
+    "name":"kolumbien",
+    "lat":4,
+    "long":-72
+  },
+  {
     "name":"kroatien",
     "lat":45.1667,
     "long":15.5

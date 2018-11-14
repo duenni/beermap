@@ -380,6 +380,11 @@ markers = [
     "long":-66
   },
   {
+    "name":"vietnam",
+    "lat":16,
+    "long":106
+  },
+  {
     "name":"wales",
     "lat":52.24,
     "long":-3.77

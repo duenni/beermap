@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "START: $(date +"%d.%m.%Y - %H:%M:%S")"
+#echo "START: $(date +"%d.%m.%Y - %H:%M:%S")"
 
 # Wiki user & year stat generator
 #generates user.json & year.json
@@ -153,4 +153,4 @@ printf "\n]" >> ${OUTFILE}
 
 }
 
-echo "STOP:  $(date +"%d.%m.%Y - %H:%M:%S")"
+#echo "STOP:  $(date +"%d.%m.%Y - %H:%M:%S")"

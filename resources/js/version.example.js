@@ -1,4 +1,4 @@
 version = {
-    commithash: "COMMITHASHHERE"
+    commithash: "COMMITHASHHERE",
     branchname: "BRANCHNAMEHERE"
 }; 

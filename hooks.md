@@ -13,9 +13,9 @@ sed -i 's/MAPBOXACCESSTOKENHERE/<realaccesstoken>/g' $path/resources/js/apikey.j
 #version.js is also in .gitignore
 git show HEAD:resources/js/version.example.js > $path/resources/js/version.js
 #show commit hash and replace COMMITHASHHERE in version.js
-sed -i 's/COMMITHASHHERE/${git rev-parse --short HEAD}/g' $path/resources/js/version.js
+sed -i 's/COMMITHASHHERE/$(git rev-parse --short HEAD)/g' $path/resources/js/version.js
 #show current branch and replace BRANCHNAMEHERE in version.js
-sed -i 's/BRANCHNAMEHERE/${git rev-parse --abbrev-ref HEAD}/g' $path/resources/js/version.js
+sed -i 's/BRANCHNAMEHERE/$(git rev-parse --abbrev-ref HEAD)/g' $path/resources/js/version.js
 echo "============= DONE ============="
 
 ````

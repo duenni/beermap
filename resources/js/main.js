@@ -153,7 +153,7 @@ for( var i = 0; i < country.length; i++ )
 {
     sum += parseInt(country[i].anzahl);
 }
-$( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum +'<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br><i class="fa fa-code-fork">&nbsp;</i>beermap version: '+version.branchname+'&nbsp'+version.commithash+'<br>');
+$( "#stats" ).html( '<i class="fa fa-folder-open">&nbsp;</i>Biere im Wiki: ' + sum +'<br> <i class="fa fa-globe">&nbsp;</i>Ertrunkene Länder: ' + drunkcountries + '<br><i class="fa fa-code-fork">&nbsp;</i>beermap version: '+version.commithash+'@'+version.branchname+'<br>');
 
 //Display marker group on initial load
 map.on('load', markergroup.addTo(map));

@@ -215,6 +215,11 @@ markers = [
     "long":105
   },
   {
+    "name":"namibia",
+    "lat":-22,
+    "long":17
+  },
+  {
     "name":"nepal",
     "lat":28,
     "long":84

@@ -1,6 +1,6 @@
 //-----------------------------Map stuff---------------------------------
 //Tile Provider
-var mapbox_streets = new L.tileLayer('https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token='+apikey.mapbox+'',{
+var mapbox_streets = new L.tileLayer('https://api.mapbox.com/styles/v1/duenni/ckg9751yf78l01apg73mxmpnm/tiles/256/{z}/{x}/{y}@2x?access_token='+apikey.mapbox+'',{
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> | <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
 });
 
